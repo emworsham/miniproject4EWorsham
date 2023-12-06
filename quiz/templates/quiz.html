@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h2>Take the Quiz</h2>
+    <form method="post">
+        {% csrf_token %}
+        <!-- Loop through questions and choices here -->
+        <button type="submit">Submit</button>
+    </form>
+{% endblock %}
