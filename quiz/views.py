@@ -6,6 +6,11 @@ from .forms import RegisterForm
 from .models import Question, QuizAttempt
 import random
 
+
+def index(request):
+    return render(request, 'index.html')
+
+
 def register(request):
     if request.method == 'POST':
         form = RegisterForm(request.POST)
