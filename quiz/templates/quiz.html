@@ -1,10 +1,23 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h2>Take the Quiz</h2>
+    <h2>Quiz</h2>
     <form method="post">
         {% csrf_token %}
-        <!-- Loop through questions and choices here -->
-        <button type="submit">Submit</button>
+        {% for question in questions %}
+            <div style="margin-bottom: 20px;">
+                <p><strong>{{ forloop.counter }}. {{ question.text }}</strong></p>
+                {% for choice in question.choices.all %}
+                    <label style="display: block; margin-left: 20px;">
+                        <input type="radio" name="{{ question.id }}" value="{{ choice.id }}" id="choice{{ choice.id }}" style="margin-right: 10px;">
+                        {{ choice.text }}
+                    </label>
+                {% endfor %}
+            </div>
+            {% if not forloop.last %}
+                <hr style="border: 1px solid #ccc;"> <!-- Horizontal line between questions -->
+            {% endif %}
+        {% endfor %}
+        <button type="submit">Submit Quiz</button>
     </form>
 {% endblock %}

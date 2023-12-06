@@ -36,14 +36,29 @@ def login(request):
 @login_required
 def take_quiz(request):
     if request.method == 'POST':
-        # Process the quiz submission here
-        pass
+        # Process the quiz submission
+        questions = Question.objects.all()
+        score = 0
+        total_questions = len(questions)
+
+        for question in questions:
+            selected_choice = request.POST.get(str(question.id))
+            if selected_choice:
+                correct_choice = question.choices.get(is_correct=True)
+                if str(correct_choice.id) == selected_choice:
+                    score += 1
+
+        percentage_score = (score / total_questions) * 100
+        QuizAttempt.objects.create(user=request.user, score=percentage_score)
+
+        return redirect('quiz_results')
     else:
         questions = list(Question.objects.all())
         if len(questions) >= 5:
             random_questions = random.sample(questions, 5)
         else:
             random_questions = questions
+
         return render(request, 'quiz.html', {'questions': random_questions})
 
 @login_required
