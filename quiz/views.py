@@ -3,7 +3,7 @@ from django.contrib.auth import login as auth_login, authenticate
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.decorators import login_required
 from .forms import RegisterForm
-from .models import Question, QuizAttempt
+from .models import Question, Choice, QuizAttempt
 import random
 
 
@@ -35,31 +35,37 @@ def login(request):
 
 @login_required
 def take_quiz(request):
+    questions = list(Question.objects.all())
+
     if request.method == 'POST':
-        # Process the quiz submission
-        questions = Question.objects.all()
+        user_answers = {}
         score = 0
-        total_questions = len(questions)
 
         for question in questions:
-            selected_choice = request.POST.get(str(question.id))
-            if selected_choice:
-                correct_choice = question.choices.get(is_correct=True)
-                if str(correct_choice.id) == selected_choice:
+            selected_choice_id = request.POST.get(str(question.id))
+            correct_choice = question.choices.get(is_correct=True)
+
+            if selected_choice_id:
+                selected_choice = question.choices.get(id=selected_choice_id)
+                user_answers[question.id] = {
+                    'question': question,
+                    'selected': selected_choice,
+                    'correct_choice': correct_choice,
+                    'is_correct': selected_choice == correct_choice
+                }
+                if selected_choice == correct_choice:
                     score += 1
 
-        percentage_score = (score / total_questions) * 100
+        percentage_score = (score / len(questions)) * 100
         QuizAttempt.objects.create(user=request.user, score=percentage_score)
 
-        return redirect('quiz_results')
-    else:
-        questions = list(Question.objects.all())
-        if len(questions) >= 5:
-            random_questions = random.sample(questions, 5)
-        else:
-            random_questions = questions
+        return render(request, 'quiz_results.html', {
+            'user_answers': user_answers.values(),
+            'score': percentage_score
+        })
 
-        return render(request, 'quiz.html', {'questions': random_questions})
+    random_questions = random.sample(questions, min(len(questions), 5))
+    return render(request, 'quiz.html', {'questions': random_questions})
 
 @login_required
 def quiz_results(request):

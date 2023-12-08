@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h2>Quiz Results</h2>
+    <p>Your score: {{ score }}%</p>
+
+    {% for answer in user_answers %}
+        <div style="margin-bottom: 20px;">
+            <p><strong>{{ forloop.counter }}. {{ answer.question.text }}</strong></p>
+            <p>Your answer: {{ answer.selected.text }} {% if answer.is_correct %} (Correct) {% else %} (Incorrect) {% endif %}</p>
+            {% if not answer.is_correct %}
+                <p style="color: green;">Correct answer: {{ answer.correct_choice.text }}</p>
+            {% endif %}
+        </div>
+        {% if not forloop.last %}
+            <hr style="border: 1px solid #ccc;">
+        {% endif %}
+    {% endfor %}
+
+    <a href="{% url 'take_quiz' %}">Take the Quiz Again</a>
+{% endblock %}

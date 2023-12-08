@@ -4,24 +4,30 @@
 <html>
 <head>
     <title>Volleyball Quiz App</title>
+    <!-- Include your stylesheet here -->
     <link rel="stylesheet" href="{% static 'style.css' %}">
-    <!-- Add links to CSS files here -->
 </head>
 <body>
     <header>
-        <h1>Welcome to the Volleyball Quiz App</h1>
-        <!-- Navigation links can go here -->
+        <!-- Other header content -->
+
+        {% if request.user.is_authenticated %}
+            <a href="#" onclick="document.getElementById('logout-form').submit();" class="logout-link">Logout</a>
+            <form id="logout-form" action="{% url 'logout' %}" method="post" style="display: none;">
+                {% csrf_token %}
+            </form>
+        {% endif %}
     </header>
 
     <main>
         {% block content %}
+        <!-- Content will be here -->
         {% endblock %}
     </main>
 
     <footer>
-        <p>© 2023 Volleyball Quiz App</p>
+        <!-- Footer content -->
     </footer>
 
-    <!-- Add JavaScript files here -->
 </body>
 </html>
