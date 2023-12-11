@@ -73,27 +73,22 @@ a:hover {
     color: #555;
 }
 
-.logout-link {
-    background: none;
-    border: none;
-    color: white;
-    cursor: pointer;
-    padding: 0;
-    font-size: 1em;
-    text-decoration: underline; /* Optional: to make it look more like a link */
-}
-
 .logout-form {
-    display: inline; /* or inline-block, depending on your layout */
-    margin: 0; /* Resets any default margin */
+    display: inline;
 }
 
 .logout-button {
-    background: none;
+    background: #333;
     border: none;
-    color: white;
+    color: fff;
     cursor: pointer;
     padding: 0;
     font-size: 1em;
     text-decoration: underline;
+    display: inline; /* Make the button inline */
+    margin: 0; /* Remove any default margin */
+    line-height: inherit; /* Inherit line height from parent */
+    font-family: inherit; /* Inherit font from parent */
 }
+
+
