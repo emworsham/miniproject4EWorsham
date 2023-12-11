@@ -1,94 +1,74 @@
-/* Basic styles for the Volleyball Quiz App */
+/* Custom styles for the Volleyball Quiz App */
 
 body {
     font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f4f4f4;
-    color: #333;
+    background-color: #e9ecef; /* Light gray background */
+    color: #212529; /* Bootstrap default text color */
     line-height: 1.6;
 }
 
-header {
-    background: #333;
-    color: #fff;
-    padding: 10px 0;
-    text-align: center;
-}
-
-header h1 {
-    margin: 0;
-}
-
+/* Main content styling */
 main {
     padding: 20px;
+    background-color: #fff; /* White background for main content */
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
 }
 
+/* Footer styling */
 footer {
     text-align: center;
     padding: 20px 0;
-    background: #333;
-    color: #fff;
+    background-color: #343a40; /* Dark footer */
+    color: #f8f9fa; /* Light text in footer */
 }
 
-form {
-    background: #fff;
+/* Custom form styles */
+form.custom-form {
+    background-color: #fff;
     padding: 20px;
     margin: 20px 0;
-    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0,0,0,.1);
 }
 
-form label {
-    display: block;
+form.custom-form label {
     margin-bottom: 5px;
 }
 
-form input[type="text"],
-form input[type="password"],
-form input[type="email"] {
+form.custom-form input[type="text"],
+form.custom-form input[type="password"],
+form.custom-form input[type="email"],
+form.custom-form input[type="submit"] {
     width: 100%;
     padding: 8px;
     margin-bottom: 10px;
-    border: 1px solid #ddd;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
 }
 
-form button {
-    display: inline-block;
-    background: #333;
-    color: #fff;
-    border: none;
-    padding: 10px 15px;
-    cursor: pointer;
+/* Utility classes */
+.text-center {
+    text-align: center;
 }
 
-form button:hover {
-    background: #555;
-}
-
+/* Link styling */
 a {
-    color: #333;
+    color: #007bff; /* Bootstrap primary blue */
 }
 
 a:hover {
-    color: #555;
+    color: #0056b3; /* Darken on hover */
 }
 
-.logout-form {
-    display: inline;
+/* Custom button styling */
+.btn-custom {
+    background-color: #007bff; /* Bootstrap primary blue */
+    color: #fff;
 }
 
-.logout-button {
-    background: #333;
-    border: none;
-    color: fff;
-    cursor: pointer;
-    padding: 0;
-    font-size: 1em;
-    text-decoration: underline;
-    display: inline; /* Make the button inline */
-    margin: 0; /* Remove any default margin */
-    line-height: inherit; /* Inherit line height from parent */
-    font-family: inherit; /* Inherit font from parent */
+.btn-custom:hover {
+    background-color: #0056b3;
+    color: #fff;
 }
-
-
